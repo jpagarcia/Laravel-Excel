@@ -183,4 +183,14 @@ return [
         'remote_prefix' => null,
 
     ],
+
+    /*
+    /--------------------------------------------------------------------------
+    / Disconnect Sheet Toggle
+    /--------------------------------------------------------------------------
+    /
+    / Disable this configuration when importing a file with multiple sheets
+    / and one needs to reference one cell in one sheet to another.
+    */
+    'disconnect_sheet' => true,
 ];

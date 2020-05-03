@@ -109,7 +109,9 @@ class Reader
                 foreach ($this->sheetImports as $index => $sheetImport) {
                     if ($sheet = $this->getSheet($import, $sheetImport, $index)) {
                         $sheet->import($sheetImport, $sheet->getStartRow($sheetImport));
-                        $sheet->disconnect();
+                        if (config('excel.import.disconnect_sheet')) {
+                            $sheet->disconnect();
+                        }
                     }
                 }
             });
@@ -145,7 +147,9 @@ class Reader
             $calculatesFormulas = $sheetImport instanceof WithCalculatedFormulas;
             if ($sheet = $this->getSheet($import, $sheetImport, $index)) {
                 $sheets[$index] = $sheet->toArray($sheetImport, $sheet->getStartRow($sheetImport), null, $calculatesFormulas);
-                $sheet->disconnect();
+                if (config('excel.import.disconnect_sheet')) {
+                    $sheet->disconnect();
+                }
             }
         }
 
@@ -176,7 +180,9 @@ class Reader
             $calculatesFormulas = $sheetImport instanceof WithCalculatedFormulas;
             if ($sheet = $this->getSheet($import, $sheetImport, $index)) {
                 $sheets->put($index, $sheet->toCollection($sheetImport, $sheet->getStartRow($sheetImport), null, $calculatesFormulas));
-                $sheet->disconnect();
+                if (config('excel.import.disconnect_sheet')) {
+                    $sheet->disconnect();
+                }
             }
         }
 
